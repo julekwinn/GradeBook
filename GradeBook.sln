@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7A7213F7-075
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gradebook.Domain", "Gradebook.Domain\Gradebook.Domain.csproj", "{780D829D-062D-4E70-B49E-96325D5F64D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradeBook.Application", "GradeBook.Application\GradeBook.Application.csproj", "{80C8C45A-AEE8-404F-8A8B-EEED509978B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +19,17 @@ Global
 		{780D829D-062D-4E70-B49E-96325D5F64D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{780D829D-062D-4E70-B49E-96325D5F64D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{780D829D-062D-4E70-B49E-96325D5F64D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80C8C45A-AEE8-404F-8A8B-EEED509978B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C8C45A-AEE8-404F-8A8B-EEED509978B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C8C45A-AEE8-404F-8A8B-EEED509978B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C8C45A-AEE8-404F-8A8B-EEED509978B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{780D829D-062D-4E70-B49E-96325D5F64D3} = {7A7213F7-0756-42CE-944C-FABA1F15C09C}
+		{80C8C45A-AEE8-404F-8A8B-EEED509978B0} = {7A7213F7-0756-42CE-944C-FABA1F15C09C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1AAC048-68EB-4076-9976-911DB8D6DCFA}

@@ -10,8 +10,4 @@
     <ProjectReference Include="..\GradeBook.Application\GradeBook.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>

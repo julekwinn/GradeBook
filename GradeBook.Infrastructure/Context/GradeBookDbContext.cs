@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GradeBook.Infrastructure.Context
 {
-    internal class GradeBookDbContext : DbContext
+    public class GradeBookDbContext : DbContext
     {
 
         public DbSet<Student> Students { get; set; }

@@ -1,5 +1,6 @@
 ﻿
 using Gradebook.Domain.Entities;
+using GradeBook.Infrastructure.Config.Converters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.ComponentModel;
@@ -28,7 +29,7 @@ namespace GradeBook.Infrastructure.Config
                 .IsRequired();
 
             builder.Property(s=>s.DateOfBirth)
-                .HasConversion<DateOnlyConverter>()
+                .HasConversion<DateOnlyConverterr>()
                 .HasColumnName("date")
                 .IsRequired();
 

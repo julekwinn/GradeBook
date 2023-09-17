@@ -5,6 +5,8 @@ using Gradebook.Domain.Exceptions;
 using Gradebook.Domain.Entities;
 using AutoMapper;
 using GradeBook.Application.Configuration.Commands;
+using FluentValidation;
+using System.ComponentModel.DataAnnotations;
 
 namespace GradeBook.Application.Commands.Students.AddStudent;
 
@@ -13,14 +15,24 @@ internal class AddStudentCommandHandler : ICommandaHandler<AddStudentCommand, St
     private readonly IStudentRepository _studentRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    public AddStudentCommandHandler(IStudentRepository studentRepository, IUnitOfWork unitOfWork, IMapper mappper)
+    private readonly IValidator<AddStudentCommand> _validator;
+    public AddStudentCommandHandler(IStudentRepository studentRepository, IUnitOfWork unitOfWork, IMapper mappper, IValidator<AddStudentCommand> validator)
     {
         _studentRepository = studentRepository;
         _unitOfWork = unitOfWork;
         _mapper = mappper;
+        _validator = validator;
     }
     public async Task<StudentDto> Handle(AddStudentCommand request, CancellationToken cancellationToken)
     {
+        FluentValidation.Results.ValidationResult result = _validator.Validate(request);
+        if (!result.IsValid)
+        {
+            var errorList = result.Errors.Select(s => s.ErrorMessage);
+            throw new FluentValidation.ValidationException($"Invalid Command, reasons: {string.Join(",", errorList.ToArray())}");
+        }
+
+
         bool isAlreadyExist = await _studentRepository.IsAlreadyExistAsync(request.Email,cancellationToken);
         if (isAlreadyExist) 
         {

@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GradeBook.Application.Dtos;
+using MediatR;
+
 
 namespace GradeBook.Application.Commands.Students.AddStudent
 {
-    internal class AddStudentCommand
+    public class AddStudentCommand : IRequest<StudentDto>
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public DateOnly DateOfBirth { get; set; }
+        public int YearEnrolled { get; set; }
     }
 }

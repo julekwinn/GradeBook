@@ -4,6 +4,7 @@ using GradeBook.Application.Dtos;
 using MediatR;
 using Gradebook.Domain.Exceptions;
 using Gradebook.Domain.Entities;
+using AutoMapper;
 
 namespace GradeBook.Application.Commands.Students.AddStudent;
 
@@ -11,11 +12,12 @@ internal class AddStudentCommandHandler : IRequestHandler<AddStudentCommand, Stu
 {
     private readonly IStudentRepository _studentRepository;
     private readonly IUnitOfWork _unitOfWork;
-
-    public AddStudentCommandHandler(IStudentRepository studentRepository, IUnitOfWork unitOfWork)
+    private readonly IMapper _mapper;
+    public AddStudentCommandHandler(IStudentRepository studentRepository, IUnitOfWork unitOfWork, IMapper mappper)
     {
         _studentRepository = studentRepository;
         _unitOfWork = unitOfWork;
+        _mapper = mappper;
     }
     public async Task<StudentDto> Handle(AddStudentCommand request, CancellationToken cancellationToken)
     {
@@ -37,14 +39,7 @@ internal class AddStudentCommandHandler : IRequestHandler<AddStudentCommand, Stu
         _studentRepository.Add(newStudent);
         await _unitOfWork.SaveChangesAsync();
 
-        var studentDto = new StudentDto()
-        {
-            FirstName = newStudent.FirstName,
-            LastName = newStudent.LastName,
-            Email = newStudent.Email,
-            Age = DateTime.Now.Year - newStudent.DateOfBirth.ToDateTime(TimeOnly.Parse("00:00")).Year,
-            YearEnrolled = newStudent.YearEnrolled,
-        };
+        var studentDto = _mapper.Map<StudentDto>(newStudent);
 
         return studentDto;
     }

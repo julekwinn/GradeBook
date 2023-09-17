@@ -1,5 +1,6 @@
 ﻿
 
+using AutoMapper;
 using Gradebook.Domain.Abstractions;
 using GradeBook.Application.Dtos;
 using MediatR;
@@ -9,23 +10,18 @@ namespace GradeBook.Application.Queries.Students.GetStudentById;
 internal class GetStudentByIdQueryHandler : IRequestHandler<GetStudentByIdQuery, StudentDto>
 {
     private readonly IStudentRepository _studentRepository;
-    public GetStudentByIdQueryHandler(IStudentRepository studentRepository)
+    private readonly IMapper _mapper;
+
+    public GetStudentByIdQueryHandler(IStudentRepository studentRepository, IMapper mapper)
     {
         _studentRepository = studentRepository;
+        _mapper = mapper;
     }
     public async Task<StudentDto> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
     {
         var student = await _studentRepository.GetByIdAsync(request.Id, cancellationToken);
 
-        var studentDto = new StudentDto
-        {
-            Id = student.Id,
-            FirstName = student.FirstName,
-            LastName = student.LastName,
-            Email = student.Email,
-            Age = DateTime.Now.Year - student.DateOfBirth.ToDateTime(TimeOnly.Parse("00:00")).Year,
-            YearEnrolled = student.YearEnrolled,
-        };
+        var studentDto = _mapper.Map<StudentDto>(student);
         return studentDto;
     }
 }

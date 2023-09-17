@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Gradebook.Domain\Gradebook.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\Students\RemoveStudent\" />
+  </ItemGroup>
+
 </Project>

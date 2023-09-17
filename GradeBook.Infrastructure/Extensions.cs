@@ -12,6 +12,8 @@ namespace GradeBook.Infrastructure
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            services.AddScoped<IStudentReadOnlyRepository, StudentReadOnlyRepository>();
+
             services.AddScoped<IStudentRepository, StudentRepository>();
 
             services.AddDbContext<GradeBookDbContext>(ctx => ctx.UseSqlServer(configuration.GetConnectionString("GradebookCS")));

@@ -13,7 +13,7 @@ public static class Extensions
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         var executingAssembly = Assembly.GetExecutingAssembly();
-        services.AddMediatR(executingAssembly);
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         services.AddAutoMapper(executingAssembly);
 
         services.AddScoped<IValidator<AddStudentCommand>, AddStudentCommandValidation>();

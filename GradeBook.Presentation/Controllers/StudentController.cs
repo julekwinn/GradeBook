@@ -1,6 +1,7 @@
 ﻿
 
 using GradeBook.Application.Commands.Students.AddStudent;
+using GradeBook.Application.Commands.Students.RemoveStudent;
 using GradeBook.Application.Commands.Students.UpdateStudent;
 using GradeBook.Application.Dtos;
 using GradeBook.Application.Queries.Students.GetStudentByEmail;
@@ -71,5 +72,14 @@ public class StudentController : Controller
     {
         await _mediator.Send(command);
         return NoContent(); 
+    }
+
+    [HttpDelete("{id}")]
+    [SwaggerOperation("Remove Student")]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    public async Task<ActionResult> Delete([FromRoute] int id)
+    {
+        await _mediator.Send(new RemoveStudentCommand(id));
+        return NoContent();
     }
 }

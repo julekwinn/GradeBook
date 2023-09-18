@@ -10,6 +10,7 @@ public static class Extensions
     public static IServiceCollection AddPresentation(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
         return services;
     }
 }

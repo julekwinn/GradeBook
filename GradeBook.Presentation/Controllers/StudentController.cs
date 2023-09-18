@@ -1,6 +1,7 @@
 ﻿
 
 using GradeBook.Application.Dtos;
+using GradeBook.Application.Queries.Students.GetStudentByEmail;
 using GradeBook.Application.Queries.Students.GetStudentById;
 using GradeBook.Application.Queries.Students.GetStudents;
 using MediatR;
@@ -37,6 +38,15 @@ public class StudentController : Controller
     public async Task<ActionResult> GetById([FromRoute] int id)
     {
         var result = await _mediator.Send(new GetStudentByIdQuery(id));
+        return result != null ? Ok(result) : NotFound(); ;
+    }
+
+    [HttpGet("{email}")]
+    [SwaggerOperation("Get student by email")]
+    [ProducesResponseType(typeof(StudentDto), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult> GetByEmail([FromRoute] string email)
+    {
+        var result = await _mediator.Send(new GetStudentByEmailQuery(email));
         return result != null ? Ok(result) : NotFound(); ;
     }
 }

@@ -46,7 +46,7 @@ public class StudentController : Controller
     }
 
 
-    [HttpGet("{email}")]
+    [HttpGet("[action]/{email}")]
     [SwaggerOperation("Get student by email")]
     [ProducesResponseType(typeof(StudentDto), (int)HttpStatusCode.OK)]
     public async Task<ActionResult> GetByEmail([FromRoute] string email)

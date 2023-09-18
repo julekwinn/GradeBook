@@ -1,5 +1,6 @@
 ﻿
 
+using GradeBook.Application.Commands.Students.AddStudent;
 using GradeBook.Application.Dtos;
 using GradeBook.Application.Queries.Students.GetStudentByEmail;
 using GradeBook.Application.Queries.Students.GetStudentById;
@@ -32,6 +33,7 @@ public class StudentController : Controller
         return Ok(result);
     }
 
+
     [HttpGet("{id}")]
     [SwaggerOperation("Get student by Id")]
     [ProducesResponseType(typeof(StudentDto), (int)HttpStatusCode.OK)]
@@ -41,6 +43,7 @@ public class StudentController : Controller
         return result != null ? Ok(result) : NotFound(); ;
     }
 
+
     [HttpGet("{email}")]
     [SwaggerOperation("Get student by email")]
     [ProducesResponseType(typeof(StudentDto), (int)HttpStatusCode.OK)]
@@ -48,5 +51,15 @@ public class StudentController : Controller
     {
         var result = await _mediator.Send(new GetStudentByEmailQuery(email));
         return result != null ? Ok(result) : NotFound(); ;
+    }
+
+
+    [HttpPost]
+    [SwaggerOperation("Add Student")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    public async Task<ActionResult> Post([FromBody]AddStudentCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }
 }

@@ -1,5 +1,6 @@
 using GradeBook.Infrastructure;
 using GradeBook.Application;
+using GradeBook.Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,11 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
+builder.Services.AddPresentation();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
 
-
+app.UsePresentation();
 
 app.Run();

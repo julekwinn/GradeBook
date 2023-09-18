@@ -1,6 +1,7 @@
 ﻿
 
 using GradeBook.Application.Commands.Students.AddStudent;
+using GradeBook.Application.Commands.Students.UpdateStudent;
 using GradeBook.Application.Dtos;
 using GradeBook.Application.Queries.Students.GetStudentByEmail;
 using GradeBook.Application.Queries.Students.GetStudentById;
@@ -61,5 +62,14 @@ public class StudentController : Controller
     {
         var result = await _mediator.Send(command);
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+    }
+
+    [HttpPut]
+    [SwaggerOperation("Update Student")]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    public async Task<ActionResult> Put([FromBody] UpdateStudentCommand command)
+    {
+        await _mediator.Send(command);
+        return NoContent(); 
     }
 }

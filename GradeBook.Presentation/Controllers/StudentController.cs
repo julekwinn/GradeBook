@@ -1,6 +1,7 @@
 ﻿
 
 using GradeBook.Application.Dtos;
+using GradeBook.Application.Queries.Students.GetStudentById;
 using GradeBook.Application.Queries.Students.GetStudents;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,15 @@ public class StudentController : Controller
     public async Task<ActionResult> Get()
     {
         var result = await _mediator.Send(new GetStudentsQuery());
-        return Ok();
+        return Ok(result);
+    }
+
+    [HttpGet("{id}")]
+    [SwaggerOperation("Get student by Id")]
+    [ProducesResponseType(typeof(StudentDto), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult> GetById([FromRoute] int id)
+    {
+        var result = await _mediator.Send(new GetStudentByIdQuery(id));
+        return result != null ? Ok(result) : NotFound(); ;
     }
 }

@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Gradebook.Domain.Abstractions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace GradeBook.Presentation
+namespace GradeBook.Presentation;
+
+public static class Extensions
 {
-    internal class Extensions
+    public static IServiceCollection AddPresentation(this IServiceCollection services, IConfiguration configuration)
     {
+        
+        return services;
     }
 }
